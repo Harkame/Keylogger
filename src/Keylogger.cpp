@@ -31,25 +31,25 @@ void Traitement(int p_id_touche_clavier) {
 		//Save("[clic droit]");
 		break;
 	case 8:
-		Save("[<--]");
+		Save("[BACKSPACE]");
 		break;
 	case 13:
-		Save("[entree]\n");
+		Save("[ENTER]\n");
 		break;
 	case 32:
 		Save(" ");
 		break;
 	case 37:
-		Save("[<-]");
+		Save("[LEFT]");
 		break;
 	case 38:
-		Save("[<|]");
+		Save("[UP]");
 		break;
 	case 39:
-		Save("[->]");
+		Save("[RIGHT]");
 		break;
 	case 40:
-		Save("[|>]");
+		Save("[DOWN]");
 		break;
 	case 48:
 		Save("0");
