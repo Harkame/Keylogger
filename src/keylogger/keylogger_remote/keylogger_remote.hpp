@@ -1,5 +1,5 @@
-#ifndef KEYLOGGER_REMOTE_HPP_
-#define KEYLOGGER_REMOTE_HPP_
+#ifndef _KEYLOGGER_REMOTE_HPP_
+#define _KEYLOGGER_REMOTE_HPP_
 
 #include "../keylogger.hpp"
 

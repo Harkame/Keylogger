@@ -1,5 +1,5 @@
-#ifndef KEYLOGGER_LOCAL_HPP_
-#define KEYLOGGER_LOCAL_HPP_
+#ifndef _KEYLOGGER_LOCAL_HPP_
+#define _KEYLOGGER_LOCAL_HPP_
 
 #include "../keylogger.hpp"
 

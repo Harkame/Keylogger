@@ -1,17 +1,5 @@
-#ifndef KEYLOGGER_HPP_
-#define KEYLOGGER_HPP_
-
-#include <winsock2.h>
-#include <iostream>
-#include <Windows.h>
-#include <fstream>
-#include <string.h>
-#include <unistd.h>
-#include <getopt.h>
-#include <string>
-#include <cstring>
-#include <cstddef>
-#include <sstream>
+#ifndef _KEYLOGGER_HPP_
+#define _KEYLOGGER_HPP_
 
 using namespace std;
 
