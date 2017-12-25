@@ -5,10 +5,10 @@
 
 class keylogger_local : virtual public keylogger
 {
-    private:
+	private:
 		ofstream* a_ofstream;
 
-    public:
+	public:
 		keylogger_local();
 
 		virtual ~keylogger_local();
