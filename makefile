@@ -1,4 +1,5 @@
 MKDIR = mkdir -p
+G++ = g++ --pedantic-errors -Wall -Wextra -Werror -Wfatal-errors -O3
 
 mkdir: directory main
 
@@ -8,4 +9,4 @@ directory:
 main: keylogger
 
 keylogger:
-	g++ ./src/main.cpp -lws2_32 -o ./bin/main.exe;
+	${G++} ./src/main.cpp -lws2_32 -o ./bin/main.exe;

