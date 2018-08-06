@@ -24,8 +24,7 @@ void initialize_options(int argc, char** argv)
 
 	struct option t_long_options[] =
 	{
-	{
-	LONG_OPTION_LOCAL, no_argument, NULL, SHORT_OPTION_LOCAL },
+	{ LONG_OPTION_LOCAL, no_argument, NULL, SHORT_OPTION_LOCAL },
 	{
 	LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH },
 	{
