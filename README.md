@@ -6,7 +6,7 @@ run command make
 
 # Dependencies
 
-[MinGW](http://www.mingw.org) for command make OR EQUIVALENT, for g++ and command make
+[MinGW](http://www.mingw.org) for g++ and command make
 
 # Usage
 
