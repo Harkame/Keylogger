@@ -1,12 +1,9 @@
 G++ = g++ -O3 --pedantic-errors -Wall -Wextra -Werror -Wfatal-errors
-main: directory keylogger clear
+main: directory keylogger
 
 directory:
-	rm -rf ./bin/
-	mkdir ./bin/
+	if not exist bin mkdir bin
+
 
 keylogger:
 	${G++} ./src/main.cpp -lws2_32 -o ./bin/main.exe;
-
-clear:
-	find . -name "*.gch" -type f -delete
