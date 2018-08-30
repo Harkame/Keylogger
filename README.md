@@ -1,12 +1,12 @@
-WINDOWS ONLY
+BUILD AND RUN FOR WINDOWS ONLY
 
 # Installation
 
-run command make (REQUIRE MINGW OR EQUIVALENT)
+run command make
 
 # Dependencies
 
-[MinGW](http://www.mingw.org) for command make OR EQUIVALENT
+[MinGW](http://www.mingw.org) for command make OR EQUIVALENT, for g++ and command make
 
 # Usage
 
