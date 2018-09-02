@@ -28,7 +28,7 @@
 #define SHORT_OPTION_HELP 'h'
 
 #define HELP_MESSAGE "Keylogger : "
-#define HELP_MESSAGE_REQUIERED "\t[REQUIERED] Parameters
+#define HELP_MESSAGE_REQUIERED "\t[REQUIERED] Parameters : Please, choose one of them"
 #define HELP_MESSAGE_LOCAL "\t\t-l | --local : local keylogger, store data into file on this computer, require 1 argument (destination path)"
 #define HELP_MESSAGE_LOCAL_EXAMPLE "\t\t\tExample : ./bin/main.exe -l D:\\file.txt"
 #define HELP_MESSAGE_REMOTE "\t\t-r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)"

