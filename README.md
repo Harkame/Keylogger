@@ -10,11 +10,11 @@ run command make
 
 # Usage
 
-This program propose 2 types of keylogger
+This program propose 2 type of keylogger
 
 ## [REQUIERED] Parameters : Please, choose one of them
 
-        -l | --local : local keylogger, store data into file on this computer, require 1 argument (destination path)
+        -l | --local : local keylogger, store data into file on this computer, require 1 argument (destination file)
                 Example : ./bin/main.exe -l D:\file.txt
 
         -r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)
@@ -28,7 +28,7 @@ This program propose 2 types of keylogger
         -a | --alphabet_only : Store alphabet only, A-z (based on ascii)
                 Example : ./bin/main.exe ... -a
 
-        -C | --store_character : Default store is int value, use this option if you want to store with character
+        -C | --store_character : Default storage format is int, use this option if you want to store as character
                 Example : ./bin/main.exe ... -C
 
         -h | --help : print this help
