@@ -47,7 +47,7 @@
 #define HELP_MESSAGE_STORE_CHARACTER_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -C"
 #define HELP_MESSAGE_TIMER "\t\t-t | --timer : How much time (second) before stop  keylogger (DEFAULT : 999999999)"
 #define HELP_MESSAGE_TIMER_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -t 500"
-#define HELP_MESSAGE_HELP "\t\t-h | --help : print this help"
+#define HELP_MESSAGE_HELP "\t\t-h | --help : Show this help"
 #define HELP_MESSAGE_HELP_EXAMPLE "\t\t\tExample : ./bin/main.exe -h"
 
 #define ERROR_MESSAGE_SETCONTROLECTRLHANDLER "error SetConsoleCtrlHandler "

