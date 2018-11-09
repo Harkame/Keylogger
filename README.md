@@ -12,7 +12,7 @@ run command make
 
 This program propose 2 type of keylogger
 
-## Parameters
+## Parameters/Options
 
 ### [REQUIERED] Please, choose one of them
 
