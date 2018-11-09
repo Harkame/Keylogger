@@ -29,7 +29,7 @@ class keylogger
 		virtual ~keylogger();
 
     /*
-    * do an infinite loop and store and call method store
+    * Did an infinite loop and store and call method store
     */
     virtual void start();
 
