@@ -1,8 +1,6 @@
 #ifndef _MAIN_HPP_
 #define _MAIN_HPP_
 
-#pragma once
-
 #include <winsock2.h> //SOCKET, etc
 #include <iostream> //cout
 #include <fstream> //ofstream
