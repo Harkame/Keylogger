@@ -24,6 +24,9 @@ This program propose 2 type of keylogger
 
 ### [OPTIONAL]
 
+        -b | --buffer_size : Buffer size before store data (file or socket) (DEFAULT : 50)
+                Example : ./bin/main.exe ... -b 100
+
         -c | --no_click : don't store click keys (based on ascii)
                 Example : ./bin/main.exe ... -c
 
@@ -32,6 +35,9 @@ This program propose 2 type of keylogger
 
         -C | --storage_format_character : Default storage format is int, use this option if you want to store as character
                 Example : ./bin/main.exe ... -C
+                
+        -t | --timer : How much time (second) before stop  keylogger (DEFAULT : 999999999)
+                Example : ./bin/main.exe ... -t 500
 
         -h | --help : Show this help
                 Example : ./bin/main.exe -h
