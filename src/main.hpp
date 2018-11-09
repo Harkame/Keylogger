@@ -18,7 +18,7 @@
 #define LONG_OPTION_BUFFER_SIZE "buffer_size"
 #define LONG_OPTION_NO_CLICK "no_click"
 #define LONG_OPTION_ALPHABET_ONLY "alphabet_only"
-#define LONG_OPTION_STORE_CHARACTER "store_character"
+#define LONG_OPTION_STORE_CHARACTER "storage_format_character"
 #define LONG_OPTION_TIMER "timer"
 #define LONG_OPTION_HELP "help"
 
