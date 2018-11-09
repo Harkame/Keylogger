@@ -1,8 +1,6 @@
 #ifndef _KEYLOGGER_HPP_
 #define _KEYLOGGER_HPP_
 
-#pragma once
-
 using namespace std;
 
 class keylogger
