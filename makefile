@@ -1,10 +1,7 @@
-G++ = g++ -O3 --pedantic-errors -Wall -Wextra -Werror -Wfatal-errors
+G++ = g++
+OPTIONS = -std=c++17 -O3 -W -Wall -Weffc++ -Werror -pedantic
 
-main: directory keylogger
-
-directory:
-	if not exist bin\
-		mkdir bin\
+main: keylogger
 
 keylogger:
-	${G++} ./src/main.cpp -lws2_32 -o ./bin/main.exe
+	${G++} ${OPTIONS} ./src/main.cpp -lws2_32 -o main.exe

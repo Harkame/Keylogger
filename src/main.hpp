@@ -6,6 +6,8 @@
 #include <fstream> //ofstream
 #include <getopt.h> //options
 #include <chrono> //chrono
+#include <windows.h>
+#include <stdio.h>
 
 #define DEFAULT_VALUE_FILE_PATH "D:/temp.txt"
 
@@ -45,14 +47,10 @@
 #define HELP_MESSAGE_ALPHABET_ONLY_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -a"
 #define HELP_MESSAGE_STORE_CHARACTER "\t\t-C | --storage_format_character : Default store is int value, use this option if you want to store with character"
 #define HELP_MESSAGE_STORE_CHARACTER_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -C"
-#define HELP_MESSAGE_TIMER "\t\t-t | --timer : How much time (second) before stop  keylogger (DEFAULT : 999999999)"
-#define HELP_MESSAGE_TIMER_EXAMPLE "\t\t\tExample : ./bin/main.exe ... -t 500"
 #define HELP_MESSAGE_HELP "\t\t-h | --help : Show this help"
 #define HELP_MESSAGE_HELP_EXAMPLE "\t\t\tExample : ./bin/main.exe -h"
 
 #define ERROR_MESSAGE_SETCONTROLECTRLHANDLER "error SetConsoleCtrlHandler "
-
-#define NO_ERROR 0
 
 #include "./keylogger/keylogger.cpp"
 #include "./keylogger/keylogger_local/keylogger_local.cpp"

