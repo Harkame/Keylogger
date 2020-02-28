@@ -1,14 +1,20 @@
-BUILD AND RUN FOR WINDOWS ONLY
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bdc8da5ad85e41e9a17f59f6886b44a1)](https://www.codacy.com/manual/Harkame/Keylogger?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Harkame/Keylogger&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b64990488d63bf69de10/maintainability)](https://codeclimate.com/github/Harkame/Keylogger/maintainability)
 
-# Installation
+# Keylogger
 
-run command make
+## Installation
 
-# Dependencies
+``` bash
 
-[MinGW](http://www.mingw.org) for g++ and command make
+make
 
-# Usage
+```
+## Dependencies
+
+-   Windows
+
+## Usage
 
 This program propose 2 type of keylogger
 
@@ -35,10 +41,6 @@ This program propose 2 type of keylogger
 
         -C | --storage_format_character : Default storage format is int, use this option if you want to store as character
                 Example : ./bin/main.exe ... -C
-                
-        -t | --timer : How much time (second) before stop  keylogger (DEFAULT : 999999999)
-                Example : ./bin/main.exe ... -t 500
 
         -h | --help : Show this help
                 Example : ./bin/main.exe -h
-
